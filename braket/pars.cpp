@@ -57,19 +57,30 @@
     }
 
     void braket_parser::find_opp(int f,int l){
-        if (f>l)
+        if (f>l) // case for empty seq
             return;
-        if (f == l ){
+        if (f == l ){ // one char seq
             if (is_closing(str[f]))
-            insertion_map.push({f,opposite(str[f])});
+            insertion_map.push({f,opposite(str[f])}); // case for closing bracket
             else
-               insertion_map.push({f,opposite(str[f])});
+               insertion_map.push({f+1,opposite(str[f])}); // case for openning, idk should have different insertion offset, so far works, bc other shit's broken
             return;
             }
-        char c = str[f];
-        int f1 = f;
-        if(!is_closing(str[f]))
-            while(opposite(str[f]) != c && ++f<=l  ){}
+        /// proper seq case
+        char c = str[f]; // save up dat openning char
+        int f1 = f;      // its position too
+        if(!is_closing(str[f])){
+            // cycle to find longest proper seq
+            // guranteed to find more proper seqs
+            int _f = l; // pos of last  good occurence
+            while(f<=l){
+                if(str[f] == opposite(c))
+                    _f = f;
+                ++f;
+                }
+            f=_f;
+            }
+
         else {
                 find_opp(f,f);
                 find_opp(f+1,l);
