@@ -19,16 +19,16 @@ double btsp::distance(const point &p1, const point &p2){
     return std::sqrt(xdif+ydif);
 }
 
-int  btsp::solve(){
+double  btsp::solve(){
     distance_pool[0][0] = 0;
     distance_pool[0][1] = distance(points[0],points[1]);
     for(int j=2; j<sz;++j)
         distance_pool[0][j] = distance_pool[0][j-1] + distance(points[j-1],points[j]);
-    int temp, min;
+    double temp, min;
     for ( int i = 1; i < sz; ++i ) {
       for ( int j = i; j < sz; ++j ) {
         distance_pool.at(i).at(j) = -1;
-        min = std::numeric_limits<int>::max();
+        min = std::numeric_limits<double>::max();
         if ( i == j || i == j -1 ) {
           for( int k = 0; k < i; ++k ) {
             temp = distance_pool.at(k).at(i) + distance(points[k],points[j]);

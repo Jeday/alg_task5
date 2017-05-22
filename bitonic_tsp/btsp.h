@@ -21,6 +21,6 @@ public:
     btsp(const std::vector<point>& _points);
 
 
-    int solve();
+    double solve();
     };
 #endif // BTSP_H
