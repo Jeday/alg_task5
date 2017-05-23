@@ -24,7 +24,7 @@ int count_plates(int plt_sz, int ln){
 class  plt
     {
 public:
-    int * solutions;
+    unsigned long long int  * solutions;
     int sz;
     int plt_sz;
     int ln;
@@ -33,7 +33,7 @@ public:
          plt_sz = _plt_sz;
          ln =_ln;
          if (sz>0){
-         solutions = new int[sz];
+         solutions = new   unsigned long long int [sz];
          if(solutions == nullptr)
              return;
          solutions[0] = 0;
@@ -41,8 +41,7 @@ public:
          for(int i = 2;i<sz;++i)
             solutions[i] = -1;
          }
-         for(int i = 0;i<sz;++i)
-            std::cout<<solutions[i]<<" ";
+
 
     }
 
@@ -52,11 +51,11 @@ public:
         return ln-ps+1;
     }
 
-   int solve(int ps, int ln){
+    long long  solve(int ps, int ln){
          int ind = get_index(ps,ln);
          if(solutions[ind] != -1)
              return solutions[ind];
-         int sol = 0 ; // solutions counter
+          unsigned long long int sol = 0 ; // solutions counter
          int _ln = ln/2+1; // steps
          int p = 0;
          while(ln-ps-p>=0 && _ln>0){
@@ -77,7 +76,13 @@ public:
 
 int main(int argc, char *argv[])
 {
-    plt p(3,5);
-    std::cout<<p.solve(3,5);
+    plt red(2,50);
+    plt green(3,50);
+    plt blue(4,50);
+    std::cout<<red.solve(2,50)+ green.solve(3,50)+blue.solve(4,50)<<std::endl;
+    std::cout<<red.solve(2,5)<<std::endl;
+    std::cout<<green.solve(3,5)<<std::endl;
+    std::cout<<blue.solve(4,5)<<std::endl;
+
 
 }
